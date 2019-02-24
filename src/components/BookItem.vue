@@ -81,6 +81,7 @@ export default {
     text-align: center;
     align-items: center;
     justify-content: center;
+    transition: background-color .5s;
     &:hover {
       background-color: $secondary_green;
     }
