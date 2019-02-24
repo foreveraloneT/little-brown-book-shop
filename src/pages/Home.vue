@@ -2,7 +2,7 @@
   <div>
     <h1>Little Brown Book Shop</h1>
     <p v-for="(book) in books" :key="book.id">
-      {{book.title}}
+      {{book.id}}: {{book.title}}
     </p>
   </div>
 </template>
