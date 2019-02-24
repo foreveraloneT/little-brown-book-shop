@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <main-layout>
+      <router-view/>
+    </main-layout>
   </div>
 </template>
 
@@ -11,13 +12,15 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import '@/scss/variable.scss';
+
 #app {
   font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: $primary_text_color;
   margin-top: 60px;
 }
 </style>

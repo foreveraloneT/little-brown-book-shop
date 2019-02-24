@@ -1,4 +1,10 @@
+@import '@/scss/variable.scss';
+
 html,
 body {
-  background-color: green;
+  background-color: white;
+}
+
+.sub-content {
+  color: $secondary_text_color;
 }
