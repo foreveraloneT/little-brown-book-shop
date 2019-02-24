@@ -1,25 +1,23 @@
 <template>
   <div>
-    <h1>Little Brown Book Shop</h1>
-    <p v-for="(book) in books" :key="book.id">
-      {{book.id}}: {{book.title}}
-    </p>
+    <little-brown-title />
+    <book-list />
   </div>
 </template>
 
 <script>
+import BookList from '@/components/BookList'
+import LittleBrownTitle from '@/components/LittleBrownTitle'
 import {
   types,
-  mapActions as bookMapAction,
-  mapState as bookMapState
+  mapActions as bookMapAction
 } from '@/store/modules/book'
 
 export default {
   name: 'Home',
-  computed: {
-    ...bookMapState({
-      books: 'data'
-    })
+  components: {
+    BookList,
+    LittleBrownTitle
   },
   methods: {
     ...bookMapAction({

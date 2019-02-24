@@ -11,14 +11,33 @@ import store from './store'
 Vue.config.productionTip = false
 Vue.use(VModal)
 
-const requireComponent = require.context(
+const requireBaseComponent = require.context(
   './components/bases',
   false,
   /Base[A-Z]\w+\.(vue|js)$/
 )
 
-requireComponent.keys().forEach((fileName) => {
-  const componentConfig = requireComponent(fileName)
+requireBaseComponent.keys().forEach((fileName) => {
+  const componentConfig = requireBaseComponent(fileName)
+
+  const componentName = upperFirst(
+    camelCase(fileName.replace(/^\.\/(.*)\.\w+$/, '$1'))
+  )
+
+  Vue.component(
+    componentName,
+    componentConfig.default || componentConfig
+  )
+})
+
+const requireLayoutComponent = require.context(
+  './layouts',
+  false,
+  /[A-Z]\w+Layout\.(vue|js)$/
+)
+
+requireLayoutComponent.keys().forEach((fileName) => {
+  const componentConfig = requireLayoutComponent(fileName)
 
   const componentName = upperFirst(
     camelCase(fileName.replace(/^\.\/(.*)\.\w+$/, '$1'))
