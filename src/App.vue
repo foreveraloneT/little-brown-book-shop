@@ -22,5 +22,6 @@ export default {
   text-align: center;
   color: $primary_text_color;
   margin-top: 60px;
+  padding-bottom: 10rem;
 }
 </style>

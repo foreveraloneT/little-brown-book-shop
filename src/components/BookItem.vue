@@ -22,7 +22,7 @@
         </div>
 
         <div class="col-md-1 col-1 add-one-item">
-          <ion-icon name="cart"></ion-icon>
+          <ion-icon name="cart" />
         </div>
       </div>
     </div>
