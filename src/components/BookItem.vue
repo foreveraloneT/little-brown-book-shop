@@ -1,5 +1,8 @@
 <template>
-  <transition name="move">
+  <transition
+    v-on:before-enter="beforeEnter"
+    v-on:enter="enter"
+  >
     <div class="card book-card">
       <div class="row no-gutters">
         <div class="col-md-2 col-2">
@@ -27,11 +30,23 @@
 </template>
 
 <script>
+import Velocity from 'velocity-animate'
+
 export default {
   name: 'BookItem',
   props: {
     book: Object,
     order: Number
+  },
+  methods: {
+    beforeEnter: function (el) {
+      el.style.opacity = 0
+    },
+    enter: function (el, done) {
+      const plusDuration = this.order >= 10 ? 0 : (this.order - 1) * 50
+      Velocity(el, { translateY: '50px' }, { duration: 150 + plusDuration })
+      Velocity(el, { opacity: 1, translateY: 0 }, { complete: done })
+    }
   }
 }
 </script>
@@ -79,14 +94,5 @@ export default {
       width: 515px;
     }
   }
-}
-
-.move-enter {
-  opacity: 0;
-  transform: translateY(200%);
-}
-
-.move-enter-active {
-  transition: all 0.5s ease-in-out;
 }
 </style>
