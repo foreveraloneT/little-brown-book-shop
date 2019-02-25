@@ -18,8 +18,8 @@ import BookList from '@/components/BookList'
 import Cart from '@/components/Cart'
 import SearchBookInput from '@/components/SearchBookInput'
 import {
-  types,
-  mapActions as bookMapAction
+  mapActions as bookMapAction,
+  types as bookTypes
 } from '@/store/modules/book'
 
 export default {
@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     ...bookMapAction({
-      getBook: types.ACTIONS.GET_BOOKS
+      getBook: bookTypes.ACTIONS.GET_BOOKS
     })
   },
   created: function () {

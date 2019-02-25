@@ -22,7 +22,10 @@
           </div>
         </div>
 
-        <div class="col-md-1 col-1 add-one-item">
+        <div
+          class="col-md-1 col-1 add-one-item"
+          @click.stop="onAddOneItem"
+        >
           <i class="ion-ios-cart" />
         </div>
       </div>
@@ -32,6 +35,10 @@
 
 <script>
 import Velocity from 'velocity-animate'
+import {
+  mapMutations as cartMapMutations,
+  types as cartTypes
+} from '@/store/modules/cart'
 
 export default {
   name: 'BookItem',
@@ -40,6 +47,9 @@ export default {
     order: Number
   },
   methods: {
+    ...cartMapMutations({
+      addOneToCart: cartTypes.MUTATIONS.ADD_ONE_ITEM
+    }),
     beforeEnter: function (el) {
       el.style.opacity = 0
     },
@@ -47,6 +57,9 @@ export default {
       const plusDuration = this.order >= 10 ? 0 : (this.order - 1) * 50
       Velocity(el, { translateY: '50px' }, { duration: 150 + plusDuration })
       Velocity(el, { opacity: 1, translateY: 0 }, { complete: done })
+    },
+    onAddOneItem: function () {
+      this.addOneToCart(this.book.id)
     }
   }
 }
