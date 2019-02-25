@@ -9,11 +9,13 @@
       </div>
     </div>
     <book-list />
+    <cart />
   </div>
 </template>
 
 <script>
 import BookList from '@/components/BookList'
+import Cart from '@/components/Cart'
 import SearchBookInput from '@/components/SearchBookInput'
 import {
   types,
@@ -24,6 +26,7 @@ export default {
   name: 'Home',
   components: {
     BookList,
+    Cart,
     SearchBookInput
   },
   methods: {
