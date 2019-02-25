@@ -19,7 +19,8 @@
 import { VueLoading } from 'vue-loading-template'
 import BookItem from './BookItem'
 import {
-  mapState as bookMapState
+  mapState as bookMapState,
+  mapGetters as bookMapGetters
 } from '@/store/modules/book'
 
 export default {
@@ -29,8 +30,10 @@ export default {
     VueLoading
   },
   computed: {
+    ...bookMapGetters({
+      books: 'fiteredData'
+    }),
     ...bookMapState({
-      books: 'data',
       isLoading: 'isLoading'
     })
   }
