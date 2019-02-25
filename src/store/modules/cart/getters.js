@@ -1,0 +1,3 @@
+// for promotion
+
+export default {}
