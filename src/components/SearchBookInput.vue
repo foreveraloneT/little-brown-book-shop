@@ -4,8 +4,7 @@
       <base-input
         placeholder="Search by name or code: ex. harry potter"
         class="book-search-input"
-        v-model="value"
-        @change.native="onChangeHandler"
+        v-model.trim="value"
       />
       <i class="ion-ios-search search-icon" />
     </div>
@@ -14,6 +13,10 @@
 
 <script>
 import debounce from 'lodash/debounce'
+import {
+  mapMutations as bookMapMutations,
+  types
+} from '@/store/modules/book'
 
 export default {
   name: 'SearchBookInput',
@@ -30,8 +33,11 @@ export default {
   },
   methods: {
     search: function () {
-      console.log('ggdd', this.value)
-    }
+      this.searchBook(this.value)
+    },
+    ...bookMapMutations({
+      searchBook: types.MUTATIONS.SEARCH_BOOKS
+    })
   },
   created: function () {
     this.debounceSearch = debounce(this.search, 500)
