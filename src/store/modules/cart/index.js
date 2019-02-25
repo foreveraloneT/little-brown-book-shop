@@ -1,11 +1,11 @@
 import { createNamespacedHelpers } from 'vuex'
-// import getters from './getters'
+import getters from './getters'
 import mutations from './mutations'
 import state from './state'
 import types from './types'
 
 const {
-  // mapGetters,
+  mapGetters,
   mapMutations,
   mapState
 } = createNamespacedHelpers('cart')
@@ -13,12 +13,12 @@ const {
 export default {
   namespaced: true,
   state,
-  // getters,
+  getters,
   mutations
 }
 
 export {
-  // mapGetters,
+  mapGetters,
   mapMutations,
   mapState,
   types

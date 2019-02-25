@@ -1,14 +1,24 @@
 <template>
-  <transition name="move" appear>
+  <transition name="move" v-if="count > 0" >
     <div class="cart-container">
       <i class="ion-ios-cart" />
+      <div class="count-item">
+        {{count}}
+      </div>
     </div>
   </transition>
 </template>
 
 <script>
+import { mapGetters as cartMapGetters } from '@/store/modules/cart'
+
 export default {
-  name: 'Cart'
+  name: 'Cart',
+  computed: {
+    ...cartMapGetters({
+      count: 'itemCount'
+    })
+  }
 }
 </script>
 
@@ -16,6 +26,7 @@ export default {
 @import '@/scss/variable.scss';
 
 .cart-container {
+  user-select: none;
   width: 70px;
   height: 70px;
   background-color: white;
@@ -35,6 +46,20 @@ export default {
   cursor: pointer;
   &:hover {
     color: $secondary_green;
+  }
+
+  .count-item {
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    background-color: $primary_green;
+    color: white;
+    padding: 1px 15px;
+    bottom: -8px;
+    border-radius: 50px;
+    -webkit-box-shadow: 1px 1px 5px 0px rgba(68,68,68,1);
+    -moz-box-shadow: 1px 1px 5px 0px rgba(68,68,68,1);
+    box-shadow: 1px 1px 5px 0px rgba(68,68,68,1);
   }
 }
 

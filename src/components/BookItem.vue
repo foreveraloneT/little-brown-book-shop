@@ -73,7 +73,6 @@ export default {
   border-color: $secondary-monotone;
   width: 100%;
   position: relative;
-  cursor: pointer;
   margin-bottom: 1rem;
   .text-footer {
     margin-bottom: 0;
@@ -96,6 +95,7 @@ export default {
     align-items: center;
     justify-content: center;
     transition: background-color .5s;
+    cursor: pointer;
     .ion-ios-cart {
       font-size: 24px;
     }
