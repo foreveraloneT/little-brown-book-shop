@@ -1,7 +1,8 @@
 <template>
   <transition
-    v-on:before-enter="beforeEnter"
-    v-on:enter="enter"
+    @before-enter="beforeEnter"
+    @enter="enter"
+    :css="false"
   >
     <div class="card book-card">
       <div class="row no-gutters">
