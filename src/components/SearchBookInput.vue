@@ -2,7 +2,7 @@
   <transition name="move" :appear="initAnimation">
     <div class="book-search-container">
       <base-input
-        placeholder="Search by name or code: ex. harry potter"
+        placeholder="Search by title or code: ex. harry potter"
         class="book-search-input"
         v-model.trim="value"
       />
