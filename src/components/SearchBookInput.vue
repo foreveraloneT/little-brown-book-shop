@@ -7,7 +7,7 @@
         v-model="value"
         @change.native="onChangeHandler"
       />
-      <ion-icon name="search" size="large" class="search-icon" />
+      <i class="ion-ios-search search-icon" />
     </div>
   </transition>
 </template>
@@ -53,9 +53,10 @@ export default {
   .search-icon {
     position: absolute;
     right: 10px;
-    top: 0;
-    bottom: 0;
+    top: 50%;
+    transform: translateY(-50%);
     margin: auto 0;
+    font-size: 32px;
   }
 }
 .move-enter {

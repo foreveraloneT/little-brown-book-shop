@@ -11,7 +11,7 @@
 
         <div class="col-md-9 col-9">
           <div class="card-body">
-            <h5 class="card-title text-left">{{ book.title }}</h5>
+            <h6 class="card-title text-left">{{ book.title }}</h6>
             <p class="text-footer book-code">
               <small class="sub-content">code: {{ book.id }}</small>
             </p>
@@ -22,7 +22,7 @@
         </div>
 
         <div class="col-md-1 col-1 add-one-item">
-          <ion-icon name="cart" />
+          <i class="ion-ios-cart" />
         </div>
       </div>
     </div>
@@ -82,6 +82,9 @@ export default {
     align-items: center;
     justify-content: center;
     transition: background-color .5s;
+    .ion-ios-cart {
+      font-size: 24px;
+    }
     &:hover {
       background-color: $secondary_green;
     }
