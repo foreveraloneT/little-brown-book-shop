@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import numeral from 'numeral'
+import { formatMonney } from '@/lib/utils/formatter'
 import RemoveItemModal from '@/components/RemoveItemModal'
 
 export default {
@@ -31,7 +31,7 @@ export default {
   computed: {
     itemPrice: function () {
       const { count, price } = this.item
-      return numeral(count * price).format('0,0.00')
+      return formatMonney(count * price)
     }
   }
 }

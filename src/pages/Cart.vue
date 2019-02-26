@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import numeral from 'numeral'
+import { formatMonney } from '@/lib/utils/formatter'
 import CartItemList from '@/components/CartItemList'
 import PaymentModal from '@/components/PaymentModal'
 import { mapGetters as cartMapGetters } from '@/store/modules/cart'
@@ -66,10 +66,10 @@ export default {
       summaryTotalPrice: 'summaryTotalPrice'
     }),
     totalPriceToShow: function () {
-      return numeral(this.totalPrice).format('0,0.00')
+      return formatMonney(this.totalPrice)
     },
     summaryTotalPriceToShow: function () {
-      return numeral(this.summaryTotalPrice).format('0,0.00')
+      return formatMonney(this.summaryTotalPrice)
     }
   },
   methods: {

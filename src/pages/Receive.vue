@@ -3,7 +3,7 @@
     <div id="haveReceive" class="row" v-if="bookCount > 0">
       <div class="col">
         <div class="row">
-          <div class="col">
+          <div class="col general-info">
             <h2>Receive</h2>
             <p><b>Receive Date> </b>{{dateToShow}}</p>
             <p><b>Address> </b>LINE: Little Brown Book Shop.</p>
@@ -57,7 +57,7 @@
 
 <script>
 import moment from 'moment'
-import numeral from 'numeral'
+import { formatMonney } from '@/lib/utils/formatter'
 import PaymentSuccessModal from '@/components/PaymentSuccessModal'
 import ReceiveItemList from '@/components/ReceiveItemList'
 import {
@@ -86,16 +86,16 @@ export default {
       summaryTotalPrice: 'summaryTotalPrice'
     }),
     totalPriceToShow: function () {
-      return numeral(this.totalPrice).format('0,0.00')
+      return formatMonney(this.totalPrice)
     },
     summaryTotalPriceToShow: function () {
-      return numeral(this.summaryTotalPrice).format('0,0.00')
+      return formatMonney(this.summaryTotalPrice)
     },
     cashToShow: function () {
-      return numeral(this.cash).format('0,0.00')
+      return formatMonney(this.cash)
     },
     cashChangeToShow: function () {
-      return numeral(this.cash - this.summaryTotalPrice).format('0,0.00')
+      return formatMonney(this.cash - this.summaryTotalPrice)
     }
   },
   mounted: function () {
@@ -114,6 +114,12 @@ export default {
 .receive-container {
   text-align: left;
 
+  .general-info {
+    P {
+      font-size: 12px;
+    }
+  }
+
   .total-price,
   .total-discount,
   .sumary-total-price,
@@ -129,4 +135,15 @@ export default {
     color: $primary_green;
   }
 }
+
+@media (min-width: 768px) {
+  .receive-container{
+    .general-info {
+      p {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
 </style>

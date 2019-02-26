@@ -5,8 +5,8 @@
     v-on="this.$listeners"
   >
   <div class="payment-success-modal">
-    <h2>Payment Success !!!</h2>
-    <h3>Thank you :)</h3>
+    <h3>Payment Success !!!</h3>
+    <h4>Thank you :)</h4>
     <img src="@/assets/images/success.gif" />
   </div>
   </base-modal>

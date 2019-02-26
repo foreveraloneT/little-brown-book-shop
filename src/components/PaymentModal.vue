@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import numeral from 'numeral'
+import { formatMonney } from '@/lib/utils/formatter'
 import { mapGetters as cartMapGetters } from '@/store/modules/cart'
 import {
   types as receiveType,
@@ -46,7 +46,7 @@ export default {
       summaryTotalPrice: 'summaryTotalPrice'
     }),
     summaryTotalPriceToShow: function () {
-      return numeral(this.summaryTotalPrice).format('0,0.00')
+      return formatMonney(this.summaryTotalPrice)
     },
     allowToPay: function () {
       return this.cashInput >= this.summaryTotalPrice
