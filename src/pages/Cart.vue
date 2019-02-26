@@ -7,6 +7,9 @@
       >
         Your cart is empty, <router-link to="/"><b>please add some book.</b></router-link>
       </div>
+      <div class="brown-pic" v-if="bookCount === 0">
+        <img src="@/assets/images/brown.png" />
+      </div>
     </div>
     <div class="row" v-if="bookCount > 0">
       <div class="col-md-12">
@@ -85,6 +88,14 @@ export default {
   position: relative;
   .no-item-text {
     text-align: center;
+    margin-bottom: 2rem;
+  }
+  .brown-pic {
+    width: 100%;
+    text-align: center;
+    img {
+      width: 150px;
+    }
   }
   .total-price {
     margin-top: 2rem;
@@ -103,7 +114,7 @@ export default {
   .payment-btn {
     position: absolute;
     right: 0;
-    margin-top: 3rem;
+    margin: 3rem 0 5rem 0;
   }
 }
 </style>
