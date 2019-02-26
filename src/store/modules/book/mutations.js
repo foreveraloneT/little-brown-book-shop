@@ -15,5 +15,8 @@ export default {
   },
   [types.MUTATIONS.SEARCH_BOOKS] (state, text) {
     Vue.set(state, 'searchKeyword', text.trim())
+  },
+  [types.MUTATIONS.CLEAR_SEARCH] (state) {
+    Vue.set(state, 'searchKeyword', '')
   }
 }

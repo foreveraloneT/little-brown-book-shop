@@ -19,6 +19,7 @@ import CartButton from '@/components/CartButton'
 import SearchBookInput from '@/components/SearchBookInput'
 import {
   mapActions as bookMapAction,
+  mapMutations as bookMapMutations,
   types as bookTypes
 } from '@/store/modules/book'
 
@@ -32,9 +33,13 @@ export default {
   methods: {
     ...bookMapAction({
       getBook: bookTypes.ACTIONS.GET_BOOKS
+    }),
+    ...bookMapMutations({
+      clearSearch: bookTypes.MUTATIONS.CLEAR_SEARCH
     })
   },
-  created: function () {
+  mounted: function () {
+    this.clearSearch()
     this.getBook()
   }
 }

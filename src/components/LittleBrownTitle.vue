@@ -31,4 +31,9 @@ h1 {
 .move-enter-active {
   transition: all .5s ease-in-out;
 }
+@media (max-width: 767.98px) {
+  h1 {
+    font-size: 2rem !important;
+  }
+}
 </style>

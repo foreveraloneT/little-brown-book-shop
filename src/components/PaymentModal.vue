@@ -27,8 +27,12 @@
 </template>
 
 <script>
-import numeral from 'numeral'
+import { formatMonney } from '@/lib/utils/formatter'
 import { mapGetters as cartMapGetters } from '@/store/modules/cart'
+import {
+  types as receiveType,
+  mapActions as receiveMapAction
+} from '@/store/modules/receive'
 
 export default {
   name: 'PaymentModal',
@@ -42,16 +46,20 @@ export default {
       summaryTotalPrice: 'summaryTotalPrice'
     }),
     summaryTotalPriceToShow: function () {
-      return numeral(this.summaryTotalPrice).format('0,0.00')
+      return formatMonney(this.summaryTotalPrice)
     },
     allowToPay: function () {
       return this.cashInput >= this.summaryTotalPrice
     }
   },
   methods: {
+    ...receiveMapAction({
+      doPayment: receiveType.ACTIONS.CREATE_PAYMENT
+    }),
     onPayHandler: function () {
       if (this.allowToPay) {
-        console.log('pay', this.cashInput)
+        this.doPayment(this.cashInput)
+        this.$router.push('/receive')
       }
     }
   }
