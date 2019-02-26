@@ -58,8 +58,8 @@ export default {
     }),
     onPayHandler: function () {
       if (this.allowToPay) {
-        console.log('pay', this.cashInput)
         this.doPayment(this.cashInput)
+        this.$router.push('/receive')
       }
     }
   }
