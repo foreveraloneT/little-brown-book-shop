@@ -1,6 +1,6 @@
 <template>
   <transition name="move" v-if="count > 0" >
-    <div class="cart-container">
+    <div class="cart-container" @click="gotoCartPage">
       <i class="ion-ios-cart" />
       <div class="count-item">
         {{count}}
@@ -18,6 +18,11 @@ export default {
     ...cartMapGetters({
       count: 'itemCount'
     })
+  },
+  methods: {
+    gotoCartPage: function () {
+      this.$router.push({ name: 'Cart' })
+    }
   }
 }
 </script>
@@ -57,9 +62,9 @@ export default {
     padding: 1px 15px;
     bottom: -8px;
     border-radius: 50px;
-    -webkit-box-shadow: 1px 1px 5px 0px rgba(68,68,68,1);
-    -moz-box-shadow: 1px 1px 5px 0px rgba(68,68,68,1);
-    box-shadow: 1px 1px 5px 0px rgba(68,68,68,1);
+    -webkit-box-shadow: 1px 1px 5px 0px rgba(68,68,68,.3);
+    -moz-box-shadow: 1px 1px 5px 0px rgba(68,68,68,.3);
+    box-shadow: 1px 1px 5px 0px rgba(68,68,68,.3);
   }
 }
 
