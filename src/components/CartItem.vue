@@ -30,6 +30,7 @@
 <script>
 import numeral from 'numeral'
 import RemoveItemModal from '@/components/RemoveItemModal'
+import debounce from 'lodash/debounce'
 import {
   types as cartTypes,
   mapMutations as cartMapMutations
@@ -52,7 +53,7 @@ export default {
       set: function (value) {
         if (value) {
           const valueToAdd = value >= 1 ? value : 1
-          this.updateCart({ id: this.item.id, value: Math.floor(valueToAdd) })
+          this.debounceUpdateCart({ id: this.item.id, value: Math.floor(valueToAdd) })
         }
       }
     },
@@ -74,6 +75,9 @@ export default {
     onClickRemoveHandler: function () {
       this.$modal.show(this.removeModalName)
     }
+  },
+  created: function () {
+    this.debounceUpdateCart = debounce(this.updateCart, 500)
   }
 }
 </script>
