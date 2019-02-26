@@ -13,3 +13,11 @@ body {
 .sub-content {
   color: $secondary_text_color;
 }
+
+a, a:hover, a:focus {
+  color: $primary_green;
+  transition: color .25s;
+  &:hover {
+    color: $secondary_green;
+  }
+}

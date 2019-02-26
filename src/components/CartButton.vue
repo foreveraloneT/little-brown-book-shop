@@ -13,7 +13,7 @@
 import { mapGetters as cartMapGetters } from '@/store/modules/cart'
 
 export default {
-  name: 'Cart',
+  name: 'CartButton',
   computed: {
     ...cartMapGetters({
       count: 'itemCount'

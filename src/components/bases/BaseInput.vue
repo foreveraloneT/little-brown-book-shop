@@ -1,6 +1,7 @@
 <template>
   <input
-    class="form-control form-control-lg"
+    class="form-control"
+    :class="sizeClass"
     type="text"
     :value="value"
     v-on="listeners"
@@ -14,14 +15,21 @@ export default {
     value: {
       type: String,
       default: ''
+    },
+    inputSize: {
+      type: String,
+      default: 'lg'
     }
   },
   computed: {
-    listeners () {
+    listeners: function () {
       return {
         ...this.$listeners,
         input: event => this.$emit('input', event.target.value)
       }
+    },
+    sizeClass: function () {
+      return `form-control-${this.inputSize}`
     }
   }
 }
