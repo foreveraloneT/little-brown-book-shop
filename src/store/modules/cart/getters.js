@@ -9,5 +9,11 @@ export default {
       count: state.items[id],
       ...hashedBook[id]
     }))
+  },
+  totalPrice: (state, getters) => {
+    return sum(getters['itemList'].map(item => item.price * item.count))
+  },
+  sumaryTotalPrice: (state, getters) => {
+    return getters['totalPrice']
   }
 }

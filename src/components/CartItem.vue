@@ -91,6 +91,7 @@ export default {
   .remove-icon {
     font-size: 32px;
     color: $primary_green;
+    text-align: center;
     cursor: pointer;
     transition: color .25s, transform .25s;
     .icon {
