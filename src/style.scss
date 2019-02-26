@@ -5,6 +5,11 @@ body {
   background-color: white;
 }
 
+*::selection {
+  background: $primary_monotone;
+  color: white;
+}
+
 .sub-content {
   color: $secondary_text_color;
 }
