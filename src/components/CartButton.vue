@@ -1,7 +1,7 @@
 <template>
   <transition name="move" v-if="count > 0" >
-    <div class="cart-container">
-      <i class="ion-ios-cart" />
+    <div class="cart-container" @click="gotoCartPage">
+      <i class="ion-ios-cart" :style="cartIconStyle" />
       <div class="count-item">
         {{count}}
       </div>
@@ -13,11 +13,35 @@
 import { mapGetters as cartMapGetters } from '@/store/modules/cart'
 
 export default {
-  name: 'Cart',
+  name: 'CartButton',
+  data: function () {
+    return {
+      iconSize: 1
+    }
+  },
   computed: {
     ...cartMapGetters({
       count: 'itemCount'
-    })
+    }),
+    cartIconStyle: function () {
+      return {
+        transform: `scale(${this.iconSize})`
+      }
+    }
+  },
+  watch: {
+    count: function () {
+      this.updateIconSize()
+    }
+  },
+  methods: {
+    gotoCartPage: function () {
+      this.$router.push({ name: 'Cart' })
+    },
+    updateIconSize: function () {
+      this.iconSize = 1.2
+      setTimeout(() => { this.iconSize = 1 }, 150)
+    }
   }
 }
 </script>
@@ -57,9 +81,13 @@ export default {
     padding: 1px 15px;
     bottom: -8px;
     border-radius: 50px;
-    -webkit-box-shadow: 1px 1px 5px 0px rgba(68,68,68,1);
-    -moz-box-shadow: 1px 1px 5px 0px rgba(68,68,68,1);
-    box-shadow: 1px 1px 5px 0px rgba(68,68,68,1);
+    -webkit-box-shadow: 1px 1px 5px 0px rgba(68,68,68,.3);
+    -moz-box-shadow: 1px 1px 5px 0px rgba(68,68,68,.3);
+    box-shadow: 1px 1px 5px 0px rgba(68,68,68,.3);
+  }
+
+  .ion-ios-cart {
+    transition: transform .2s ease-in-out;
   }
 }
 
@@ -75,6 +103,6 @@ export default {
   transform: translateY(50%);
 }
 .move-enter-active {
-  transition: all .25s ease-in-out;
+  transition: all .1s ease-in-out;
 }
 </style>

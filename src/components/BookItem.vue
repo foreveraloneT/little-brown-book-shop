@@ -24,7 +24,7 @@
 
         <div
           class="col-md-1 col-1 add-one-item"
-          @click.stop="onAddOneItem"
+          @click.stop="throttleOnAddOneItem"
         >
           <i class="ion-ios-cart" />
         </div>
@@ -35,6 +35,7 @@
 
 <script>
 import Velocity from 'velocity-animate'
+import debounce from 'lodash/debounce'
 import {
   mapMutations as cartMapMutations,
   types as cartTypes
@@ -61,6 +62,9 @@ export default {
     onAddOneItem: function () {
       this.addOneToCart(this.book.id)
     }
+  },
+  created: function () {
+    this.throttleOnAddOneItem = debounce(this.onAddOneItem, 200)
   }
 }
 </script>
@@ -96,11 +100,19 @@ export default {
     justify-content: center;
     transition: background-color .5s;
     cursor: pointer;
+    i {
+      transition: transform .2s ease-in-out;
+    }
     .ion-ios-cart {
       font-size: 24px;
     }
     &:hover {
       background-color: $secondary_green;
+    }
+    &:active {
+      i {
+        transform: scale(1.3)
+      }
     }
   }
 }
