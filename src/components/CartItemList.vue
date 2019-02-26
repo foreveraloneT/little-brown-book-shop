@@ -4,7 +4,7 @@
       v-for="(item, order) in items"
       :item="item"
       :key="item.id"
-      :order="order"
+      :order="order + 1"
     />
   </div>
 </template>

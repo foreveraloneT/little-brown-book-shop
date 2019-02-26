@@ -16,18 +16,20 @@
       />
     </div>
     <div class="col-md-2 col-2">
-      {{itemPrice}}
+      ฿{{itemPrice}}
     </div>
-    <div class="col-md-1 col-2 remove-icon">
+    <div class="col-md-1 col-2 remove-icon" @click="onClickRemoveHandler">
       <div class="icon">
         <i class="ion-ios-close" />
       </div>
     </div>
+    <remove-item-modal :name="removeModalName" :item="item" />
   </div>
 </template>
 
 <script>
 import numeral from 'numeral'
+import RemoveItemModal from '@/components/RemoveItemModal'
 import {
   types as cartTypes,
   mapMutations as cartMapMutations
@@ -35,6 +37,9 @@ import {
 
 export default {
   name: 'CartItem',
+  components: {
+    RemoveItemModal
+  },
   props: {
     order: Number,
     item: Object
@@ -53,7 +58,10 @@ export default {
     },
     itemPrice: function () {
       const { count, price } = this.item
-      return numeral(count * price).format('฿0,0.00')
+      return numeral(count * price).format('0,0.00')
+    },
+    removeModalName: function () {
+      return `remove-item-${this.item.id}`
     }
   },
   methods: {
@@ -62,6 +70,9 @@ export default {
     }),
     onBlurItemCountHandler: function () {
       this.$forceUpdate()
+    },
+    onClickRemoveHandler: function () {
+      this.$modal.show(this.removeModalName)
     }
   }
 }

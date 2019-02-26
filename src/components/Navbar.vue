@@ -48,6 +48,7 @@ nav {
   padding: 20px 16px;
   background-color: white !important;
   color: $primary_monotone !important;
+  z-index: 900;
 
   &.scrolled {
     -webkit-box-shadow: 1px 1px 3px 0px rgba(68,68,68,.3);
