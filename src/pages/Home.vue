@@ -9,13 +9,13 @@
       </div>
     </div>
     <book-list />
-    <cart />
+    <cart-button />
   </div>
 </template>
 
 <script>
 import BookList from '@/components/BookList'
-import Cart from '@/components/Cart'
+import CartButton from '@/components/CartButton'
 import SearchBookInput from '@/components/SearchBookInput'
 import {
   mapActions as bookMapAction,
@@ -26,7 +26,7 @@ export default {
   name: 'Home',
   components: {
     BookList,
-    Cart,
+    CartButton,
     SearchBookInput
   },
   methods: {
