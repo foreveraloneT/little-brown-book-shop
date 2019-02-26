@@ -6,7 +6,8 @@ const ACTIONS = {
 
 const MUTATIONS = {
   GET_BOOKS: makeCallApiAction('GET_BOOKS'),
-  SEARCH_BOOKS: 'SEARCH_BOOKS'
+  SEARCH_BOOKS: 'SEARCH_BOOKS',
+  CLEAR_SEARCH: 'CLEAR_SEARCH'
 }
 
 export default {
