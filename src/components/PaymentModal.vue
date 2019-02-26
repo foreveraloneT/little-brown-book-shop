@@ -29,6 +29,10 @@
 <script>
 import numeral from 'numeral'
 import { mapGetters as cartMapGetters } from '@/store/modules/cart'
+import {
+  types as receiveType,
+  mapActions as receiveMapAction
+} from '@/store/modules/receive'
 
 export default {
   name: 'PaymentModal',
@@ -49,9 +53,13 @@ export default {
     }
   },
   methods: {
+    ...receiveMapAction({
+      doPayment: receiveType.ACTIONS.CREATE_PAYMENT
+    }),
     onPayHandler: function () {
       if (this.allowToPay) {
         console.log('pay', this.cashInput)
+        this.doPayment(this.cashInput)
       }
     }
   }

@@ -1,0 +1,12 @@
+const ACTIONS = {
+  CREATE_PAYMENT: 'CREATE_PAYMENT'
+}
+
+const MUTATIONS = {
+  CREATE_RECEIVE: 'CREATE_RECEIVE'
+}
+
+export default {
+  ACTIONS,
+  MUTATIONS
+}

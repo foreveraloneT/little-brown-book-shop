@@ -35,7 +35,7 @@
 
 <script>
 import Velocity from 'velocity-animate'
-import debounce from 'lodash/debounce'
+import throttle from 'lodash/throttle'
 import {
   mapMutations as cartMapMutations,
   types as cartTypes
@@ -64,7 +64,7 @@ export default {
     }
   },
   created: function () {
-    this.throttleOnAddOneItem = debounce(this.onAddOneItem, 200)
+    this.throttleOnAddOneItem = throttle(this.onAddOneItem, 500)
   }
 }
 </script>
