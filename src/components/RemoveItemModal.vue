@@ -1,5 +1,5 @@
 <template>
-  <base-modal v-bind="modalProps">
+  <base-modal v-bind="this.$attrs" v-on="this.$listeners">
     <div class="remove-modal">
       <h2>Remove Item</h2>
       <p>Are you sure to remove <span class="item-title">{{item.title}}</span> from cart ?</p>
@@ -24,11 +24,6 @@ export default {
   name: 'RemoveItemModal',
   props: {
     item: Object
-  },
-  computed: {
-    modalProps: function () {
-      return this.$attrs
-    }
   },
   methods: {
     ...cartMapMutation({

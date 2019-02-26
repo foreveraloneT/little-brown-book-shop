@@ -13,7 +13,7 @@ export default {
   totalPrice: (state, getters) => {
     return sum(getters['itemList'].map(item => item.price * item.count))
   },
-  sumaryTotalPrice: (state, getters) => {
+  summaryTotalPrice: (state, getters) => {
     return getters['totalPrice']
   }
 }

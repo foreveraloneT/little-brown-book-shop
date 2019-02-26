@@ -27,16 +27,18 @@
 
         <div class="row sumary-total-price">
           <div class="col-md-12">
-            <span class="price">{{sumaryTotalPriceToShow}} Bath</span>
+            <span class="price">{{summaryTotalPriceToShow}} Bath</span>
           </div>
         </div>
 
         <base-button
           class="btn-primary btn-lg btn-block payment-btn"
           type="button"
+          @click="onClickPaymentHandler"
         >
           > Proceed to Payment
         </base-button>
+        <payment-modal />
       </div>
     </div>
   </div>
@@ -45,24 +47,31 @@
 <script>
 import numeral from 'numeral'
 import CartItemList from '@/components/CartItemList'
+import PaymentModal from '@/components/PaymentModal'
 import { mapGetters as cartMapGetters } from '@/store/modules/cart'
 
 export default {
   name: 'Cart',
   components: {
-    CartItemList
+    CartItemList,
+    PaymentModal
   },
   computed: {
     ...cartMapGetters({
       bookCount: 'itemCount',
       totalPrice: 'totalPrice',
-      sumaryTotalPrice: 'sumaryTotalPrice'
+      summaryTotalPrice: 'summaryTotalPrice'
     }),
     totalPriceToShow: function () {
       return numeral(this.totalPrice).format('0,0.00')
     },
-    sumaryTotalPriceToShow: function () {
-      return numeral(this.sumaryTotalPrice).format('0,0.00')
+    summaryTotalPriceToShow: function () {
+      return numeral(this.summaryTotalPrice).format('0,0.00')
+    }
+  },
+  methods: {
+    onClickPaymentHandler: function () {
+      this.$modal.show('payment-modal')
     }
   }
 }

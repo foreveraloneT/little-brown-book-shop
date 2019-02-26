@@ -27,5 +27,8 @@ export default {
   &:hover {
     transform: scale(1.1);
   }
+  &:disabled {
+    transform: none;
+  }
 }
 </style>
