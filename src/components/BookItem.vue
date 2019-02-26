@@ -96,11 +96,19 @@ export default {
     justify-content: center;
     transition: background-color .5s;
     cursor: pointer;
+    i {
+      transition: transform .2s ease-in-out;
+    }
     .ion-ios-cart {
       font-size: 24px;
     }
     &:hover {
       background-color: $secondary_green;
+    }
+    &:active {
+      i {
+        transform: scale(1.3)
+      }
     }
   }
 }
