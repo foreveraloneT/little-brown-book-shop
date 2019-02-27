@@ -14,6 +14,7 @@
         type="number"
         :min="0"
         v-model.number="cashInput"
+        @keydown.enter="onPayHandler"
       />
       <base-button
         class="btn-primary btn-lg payment-btn"

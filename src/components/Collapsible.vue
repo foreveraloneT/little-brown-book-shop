@@ -6,7 +6,7 @@
         type="button"
         @click="doToggle"
       >
-        <i class="ion-ios-arrow-dropdown" /> {{leftTitle}}
+        {{leftTitle}}
       </button>
       <div class="right-title">
         {{rightTitle}}
@@ -53,7 +53,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/scss/variable.scss';
-
 .collapsible-wrapper {
   box-sizing: border-box;
   border: 1px solid $secondary_monotone;
@@ -68,11 +67,13 @@ export default {
       color: $primary_monotone;
       padding-right: 10px;
       font-size: 18px;
+      text-align: right;
     }
 
     .btn-collapse,
     .btn-collapse:hover,
     .btn-collapse:focus {
+      text-align: left;
       color: $primary_green;
       transition: color .25s;
       &:hover {
@@ -83,6 +84,17 @@ export default {
   .body {
     div {
       padding: 10px;
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .collapsible-wrapper {
+    .title {
+      .btn-collapse,
+      .right-title {
+        font-size: 12px;
+      }
     }
   }
 }

@@ -1,12 +1,6 @@
-export const HARRY_BOOK_IDS = [
-  '9781408855652',
-  '9781408855669',
-  '9781408855676',
-  '9781408855683',
-  '9781408855690',
-  '9781408855706',
-  '9781408855713'
-]
+import config from '@/assets/config'
+
+export const HARRY_BOOK_IDS = config.HARRY_BOOK_IDS
 
 export const HARRY_PROMOTION_TITLE = [
   '', // buy 1 > not discount

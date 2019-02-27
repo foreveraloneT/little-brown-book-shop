@@ -1,4 +1,6 @@
-const END_POINT = 'https://api.jsonbin.io/b/5c52a1be15735a25423d3540'
+import config from '@/assets/config'
+
+const END_POINT = config.BOOK_ENDPOINT
 
 export default {
   books: ['get', END_POINT]
