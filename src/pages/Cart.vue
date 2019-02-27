@@ -20,17 +20,22 @@
           </div>
         </div>
 
-        <p>Promotion(s): -</p>
-
         <div class="row total-price">
           <div class="col-md-12">
-            Total: {{totalPriceToShow}} Bath
+            SUBTOTAL: {{totalPriceToShow}} Bath
+          </div>
+        </div>
+
+        <p v-if="promotions.length > 0">Promotion(s):</p>
+        <div class="row">
+          <div class="col">
+            <promotion-list :promotions="promotions" />
           </div>
         </div>
 
         <div class="row sumary-total-price">
           <div class="col-md-12">
-            <span class="price">{{summaryTotalPriceToShow}} Bath</span>
+            <span class="price">TOTAL {{summaryTotalPriceToShow}} Bath</span>
           </div>
         </div>
 
@@ -51,19 +56,22 @@
 import { formatMonney } from '@/lib/utils/formatter'
 import CartItemList from '@/components/CartItemList'
 import PaymentModal from '@/components/PaymentModal'
+import PromotionList from '@/components/PromotionList'
 import { mapGetters as cartMapGetters } from '@/store/modules/cart'
 
 export default {
   name: 'Cart',
   components: {
     CartItemList,
-    PaymentModal
+    PaymentModal,
+    PromotionList
   },
   computed: {
     ...cartMapGetters({
       bookCount: 'itemCount',
       totalPrice: 'totalPrice',
-      summaryTotalPrice: 'summaryTotalPrice'
+      summaryTotalPrice: 'summaryTotalPrice',
+      promotions: 'promotions'
     }),
     totalPriceToShow: function () {
       return formatMonney(this.totalPrice)

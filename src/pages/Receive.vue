@@ -18,7 +18,12 @@
           </div>
         </div>
 
-        <p>Promotion(s): -</p>
+        <p v-if="promotions.length > 0">Promotion(s):</p>
+        <div class="row">
+          <div class="col">
+            <promotion-list :promotions="promotions" />
+          </div>
+        </div>
 
         <div class="row total-price">
           <div class="col-md-12">
@@ -28,7 +33,7 @@
 
         <div class="row total-discount">
           <div class="col-md-12">
-            DISCOUNT: 0 Bath
+            DISCOUNT: {{totalDiscountToShow}} Bath
           </div>
         </div>
 
@@ -60,16 +65,15 @@ import moment from 'moment'
 import { formatMonney } from '@/lib/utils/formatter'
 import PaymentSuccessModal from '@/components/PaymentSuccessModal'
 import ReceiveItemList from '@/components/ReceiveItemList'
-import {
-  mapGetters as receiveMapGetters,
-  mapState as receiveMapState
-} from '@/store/modules/receive'
+import PromotionList from '@/components/PromotionList'
+import { mapState as receiveMapState } from '@/store/modules/receive'
 
 export default {
   name: 'Receive',
   components: {
     ReceiveItemList,
-    PaymentSuccessModal
+    PaymentSuccessModal,
+    PromotionList
   },
   data: function () {
     return {
@@ -78,15 +82,18 @@ export default {
   },
   computed: {
     ...receiveMapState({
-      cash: 'cash'
-    }),
-    ...receiveMapGetters({
-      bookCount: 'itemCount',
+      cash: 'cash',
       totalPrice: 'totalPrice',
-      summaryTotalPrice: 'summaryTotalPrice'
+      totalDiscount: 'totalDiscount',
+      summaryTotalPrice: 'summaryTotalPrice',
+      bookCount: 'itemCount',
+      promotions: 'promotions'
     }),
     totalPriceToShow: function () {
       return formatMonney(this.totalPrice)
+    },
+    totalDiscountToShow: function () {
+      return formatMonney(this.totalDiscount)
     },
     summaryTotalPriceToShow: function () {
       return formatMonney(this.summaryTotalPrice)

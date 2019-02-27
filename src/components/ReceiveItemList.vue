@@ -11,7 +11,7 @@
 
 <script>
 import ReceiveItem from '@/components/ReceiveItem'
-import { mapGetters as cartMapGetters } from '@/store/modules/receive'
+import { mapState as receiveMapState } from '@/store/modules/receive'
 
 export default {
   name: 'ReceiveItemList',
@@ -19,7 +19,7 @@ export default {
     ReceiveItem
   },
   computed: {
-    ...cartMapGetters({
+    ...receiveMapState({
       items: 'itemList'
     })
   }

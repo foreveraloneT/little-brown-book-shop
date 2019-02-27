@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import toNumber from 'lodash/toNumber'
 import types from './types'
 
 export default {
@@ -6,7 +7,10 @@ export default {
     Vue.set(state, 'isLoading', true)
   },
   [types.MUTATIONS.GET_BOOKS.SUCCESS] (state, data) {
-    Vue.set(state, 'data', data)
+    Vue.set(state, 'data', data.map(data => ({
+      ...data,
+      price: toNumber(data.price)
+    })))
     Vue.set(state, 'isLoading', false)
   },
   [types.MUTATIONS.GET_BOOKS.FAILURE] (state, error) {
