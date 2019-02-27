@@ -1,6 +1,7 @@
 import sum from 'lodash/sum'
 import values from 'lodash/values'
 import { HARRY_PROMOTION_TITLE } from '@/lib/constants/harry'
+import { getHarryPromotions } from '@/lib/services/harryPromotion'
 
 export default {
   itemCount: state => sum(values(state.items)),
@@ -14,29 +15,22 @@ export default {
   totalPrice: (state, getters) => {
     return sum(getters['itemList'].map(item => item.price * item.count))
   },
-  rawPromotions: (state, getters) => { // mock
-    const mock = [
-      {
-        books: [9781408855652, 9781408855669, 9781408855676],
-        discount: 116.6
-      },
-      {
-        books: [9781408855652, 9781408855669],
-        discount: 70
-      }
-    ]
-    return mock
+  rawPromotions: (state, getters) => {
+    const itemList = getters['itemList']
+    return getHarryPromotions(itemList)
   },
-  promotions: (state, getters, rootState, rootGetters) => {
-    const raw = getters['rawPromotions']
-    const hashedBook = rootGetters['book/hashedData']
+  promotions: (state, getters) => {
+    const raw = getters['rawPromotions'] // [{ books, discount }]
     return raw.map(promotion => ({
-      title: HARRY_PROMOTION_TITLE[promotion.books.length - 2],
-      discount: promotion.discount,
-      books: promotion.books.map(bookId => hashedBook[bookId])
+      ...promotion,
+      title: HARRY_PROMOTION_TITLE[promotion.books.length - 1]
     }))
   },
-  summaryTotalPrice: (state, getters) => { // mock
-    return getters['totalPrice']
+  totalDiscount: (state, getters) => {
+    const promotions = getters['promotions']
+    return sum(promotions.map(promotion => promotion.discount))
+  },
+  summaryTotalPrice: (state, getters) => {
+    return getters['totalPrice'] - getters['totalDiscount']
   }
 }

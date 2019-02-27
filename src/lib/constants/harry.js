@@ -1,14 +1,15 @@
 export const HARRY_BOOK_IDS = [
-  9781408855652,
-  9781408855669,
-  9781408855676,
-  9781408855683,
-  9781408855690,
-  9781408855706,
-  9781408855713
+  '9781408855652',
+  '9781408855669',
+  '9781408855676',
+  '9781408855683',
+  '9781408855690',
+  '9781408855706',
+  '9781408855713'
 ]
 
 export const HARRY_PROMOTION_TITLE = [
+  '', // buy 1 > not discount
   '(Harry Potter): buy 2 unique series books discount 10%',
   '(Harry Potter): buy 3 unique series books discount 11%',
   '(Harry Potter): buy 4 unique series books discount 12%',
@@ -18,6 +19,7 @@ export const HARRY_PROMOTION_TITLE = [
 ]
 
 export const HARRY_PROMOTION_PERCENT_DISCOUNT = [
+  0, // buy 1 > not discount
   0.10,
   0.11,
   0.12,

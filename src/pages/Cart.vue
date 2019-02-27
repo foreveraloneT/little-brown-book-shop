@@ -20,22 +20,22 @@
           </div>
         </div>
 
-        <p>Promotion(s):</p>
+        <div class="row total-price">
+          <div class="col-md-12">
+            SUBTOTAL: {{totalPriceToShow}} Bath
+          </div>
+        </div>
+
+        <p v-if="promotions.length > 0">Promotion(s):</p>
         <div class="row">
           <div class="col">
             <promotion-list :promotions="promotions" />
           </div>
         </div>
 
-        <div class="row total-price">
-          <div class="col-md-12">
-            Total: {{totalPriceToShow}} Bath
-          </div>
-        </div>
-
         <div class="row sumary-total-price">
           <div class="col-md-12">
-            <span class="price">{{summaryTotalPriceToShow}} Bath</span>
+            <span class="price">TOTAL {{summaryTotalPriceToShow}} Bath</span>
           </div>
         </div>
 

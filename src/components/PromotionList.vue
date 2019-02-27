@@ -14,7 +14,7 @@ import PromotionItem from '@/components/PromotionItem'
 export default {
   name: 'PromotionList',
   props: {
-    promotions: Object
+    promotions: Array
   },
   components: {
     PromotionItem
