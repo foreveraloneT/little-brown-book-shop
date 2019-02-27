@@ -20,7 +20,12 @@
           </div>
         </div>
 
-        <p>Promotion(s): -</p>
+        <p>Promotion(s):</p>
+        <div class="row">
+          <div class="col">
+            <promotion-list :promotions="promotions" />
+          </div>
+        </div>
 
         <div class="row total-price">
           <div class="col-md-12">
@@ -51,13 +56,60 @@
 import { formatMonney } from '@/lib/utils/formatter'
 import CartItemList from '@/components/CartItemList'
 import PaymentModal from '@/components/PaymentModal'
+import PromotionList from '@/components/PromotionList'
 import { mapGetters as cartMapGetters } from '@/store/modules/cart'
+
+const mockPromotions = [
+  {
+    title: '(Harry Potter): buy 3 unique series books discount 11%',
+    books: [
+      {
+        id: 9781408855652,
+        title: 'Harry Potter and the Philosopher\'s Stone (I)',
+        price: 350
+      },
+      {
+        id: 9781408855669,
+        title: 'Harry Potter and the Chamber of Secrets (II)',
+        price: 350
+      },
+      {
+        id: 9781408855676,
+        title: 'Harry Potter and the Prisoner of Azkaban (III)',
+        price: 350
+      }
+    ],
+    discount: 116.6
+  },
+  {
+    title: '(Harry Potter): buy 2 unique series books discount 10%',
+    books: [
+      {
+        id: 9781408855652,
+        title: 'Harry Potter and the Philosopher\'s Stone (I)',
+        price: 350
+      },
+      {
+        id: 9781408855669,
+        title: 'Harry Potter and the Chamber of Secrets (II)',
+        price: 350
+      }
+    ],
+    discount: 70
+  }
+]
 
 export default {
   name: 'Cart',
   components: {
     CartItemList,
-    PaymentModal
+    PaymentModal,
+    PromotionList
+  },
+  data: function () {
+    return {
+      promotions: mockPromotions
+    }
   },
   computed: {
     ...cartMapGetters({
