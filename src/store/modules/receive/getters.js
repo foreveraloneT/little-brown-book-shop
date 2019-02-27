@@ -13,7 +13,7 @@ export default {
   totalPrice: (state, getters) => {
     return sum(getters['itemList'].map(item => item.price * item.count))
   },
-  summaryTotalPrice: (state, getters) => {
+  summaryTotalPrice: (state, getters) => { // mock
     return getters['totalPrice']
   }
 }
