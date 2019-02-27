@@ -2,7 +2,19 @@
 
 > A Vue.js project for the little brown book shop
 
-## Build Setup
+## Live
+
+[https://little-brown-book-shop-2a059.firebaseapp.com/#/](https://little-brown-book-shop-2a059.firebaseapp.com/#/)
+
+## Change log
+
+[CHANGELOG.md](CHANGELOG.md)
+
+## Configuration file
+
+[src/assets/config.js](src/assets/config.js)
+
+## Build Setup (From Vue-cli)
 
 ``` bash
 # install dependencies
@@ -23,5 +35,3 @@ npm run unit
 # run all tests
 npm test
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
