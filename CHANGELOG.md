@@ -1,5 +1,10 @@
 ## [v1.0.2]
 
+### Internal
+- Unit test: not coveraged
+
+## [v1.0.2]
+
 ### Fixs
 - Fix promotion calculation again
 - Unit test (inprogress)
