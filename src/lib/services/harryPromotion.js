@@ -8,7 +8,7 @@ import {
   HARRY_PROMOTION_PERCENT_DISCOUNT
 } from '@/lib/constants/harry'
 
-export const _calculateDiscount = hashedBooks => {
+export const _calculateDiscount = (hashedBooks) => {
   const books = values(hashedBooks)
   const totalPrice = sum(books.map(book => book.price))
   return totalPrice * HARRY_PROMOTION_PERCENT_DISCOUNT[books.length - 1]
@@ -24,7 +24,12 @@ export const _creatGroup = hashedBooks => ({
   discount: _calculateDiscount(hashedBooks)
 })
 
-export const _getHarryPromotions = (books) => {
+export const _getUseableGroup = groups => groups.map(group => ({
+  books: values(group.hashedBooks),
+  discount: group.discount
+})).filter(group => group.books.length > 1)
+
+export const _getHarryPromotionsByBestDiff = (books) => {
   let groups = []
 
   books.forEach((book) => {
@@ -50,11 +55,29 @@ export const _getHarryPromotions = (books) => {
     }
   })
 
-  return groups.map(group => ({
-    books: values(group.hashedBooks),
-    discount: group.discount
-  })).filter(group => group.books.length > 1)
+  return _getUseableGroup(groups)
 }
+
+export const _getHarryPromotionsByLongestPromotion = (books) => {
+  let groups = []
+  let lastBookId = -1
+  let currentIndex = 0
+
+  books.forEach((book) => {
+    if (book.id === lastBookId) {
+      currentIndex += 1
+    } else {
+      currentIndex = 0
+      lastBookId = book.id
+    }
+    const oldHashed = groups[currentIndex] ? groups[currentIndex].hashedBooks : {}
+    groups[currentIndex] = _creatGroup(_createHashedBooks(book, oldHashed))
+  })
+
+  return _getUseableGroup(groups)
+}
+
+export const summaryDiscount = groups => sum(groups.map(group => group.discount))
 
 export const getHarryPromotions = (cartItemList) => {
   const sortedHarryBooks = cartItemList.filter(book => HARRY_BOOK_IDS.includes(book.id))
@@ -70,6 +93,13 @@ export const getHarryPromotions = (cartItemList) => {
     fill(Array(book.count), omit(book, ['count']))
   )
 
-  const result = _getHarryPromotions(seperatedBooks)
-  return result
+  const groupsBestDiff = _getHarryPromotionsByBestDiff(seperatedBooks)
+  const groupsLongest = _getHarryPromotionsByLongestPromotion(seperatedBooks)
+  const discountBestDiff = summaryDiscount(groupsBestDiff)
+  const discountLongest = summaryDiscount(groupsLongest)
+
+  if (discountBestDiff > discountLongest) {
+    return groupsBestDiff
+  }
+  return groupsLongest
 }
