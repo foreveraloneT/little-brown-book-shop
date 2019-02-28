@@ -61,7 +61,7 @@ export const getHarryPromotions = (cartItemList) => {
     .sort((book1, book2) => {
       const countDiff = book2.count - book1.count
       if (countDiff === 0) {
-        return book2.price - book1.price
+        return book1.price - book2.price
       }
       return countDiff
     })
