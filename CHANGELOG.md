@@ -1,3 +1,9 @@
+## [v1.0.2]
+
+### Fixs
+- Fix promotion calculation again
+- Unit test (inprogress)
+
 ## [v1.0.1]
 
 ### Fixs
