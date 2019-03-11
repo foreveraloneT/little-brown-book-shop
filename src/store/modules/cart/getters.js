@@ -1,7 +1,7 @@
 import sum from 'lodash/sum'
 import values from 'lodash/values'
-import { HARRY_PROMOTION_TITLE } from '@/lib/constants/harry'
 import { getHarryPromotions } from '@/lib/services/harryPromotion'
+import { getPromotion } from '@/lib/services/fourBuyThreePromotion'
 
 export default {
   itemCount: state => sum(values(state.items)),
@@ -15,16 +15,11 @@ export default {
   totalPrice: (state, getters) => {
     return sum(getters['itemList'].map(item => item.price * item.count))
   },
-  rawPromotions: (state, getters) => {
-    const itemList = getters['itemList']
-    return getHarryPromotions(itemList)
-  },
   promotions: (state, getters) => {
-    const raw = getters['rawPromotions'] // [{ books, discount }]
-    return raw.map(promotion => ({
-      ...promotion,
-      title: HARRY_PROMOTION_TITLE[promotion.books.length - 1]
-    }))
+    const itemList = getters['itemList']
+    const ThreeFreeOnePromotion = getPromotion(itemList)
+    const harryPromotions = getHarryPromotions(itemList)
+    return [...harryPromotions, ...ThreeFreeOnePromotion]
   },
   totalDiscount: (state, getters) => {
     const promotions = getters['promotions']

@@ -5,7 +5,8 @@ import values from 'lodash/values'
 import sum from 'lodash/sum'
 import {
   HARRY_BOOK_IDS,
-  HARRY_PROMOTION_PERCENT_DISCOUNT
+  HARRY_PROMOTION_PERCENT_DISCOUNT,
+  HARRY_PROMOTION_TITLE
 } from '@/lib/constants/harry'
 
 export const _calculateDiscount = (hashedBooks) => {
@@ -28,35 +29,6 @@ export const _getUseableGroup = groups => groups.map(group => ({
   books: values(group.hashedBooks),
   discount: group.discount
 })).filter(group => group.books.length > 1)
-
-export const _getHarryPromotionsByBestDiff = (books) => {
-  let groups = []
-
-  books.forEach((book) => {
-    let bestDiff = -1
-    let bestGroupIndex = -1
-
-    groups.forEach((group, groupIndex) => {
-      if (!group.hashedBooks[book.id]) {
-        const tempHashedBook = _createHashedBooks(book, group.hashedBooks)
-        const tempDiscount = _calculateDiscount(tempHashedBook)
-        const tempDiff = tempDiscount - group.discount
-        if (tempDiff > bestDiff) {
-          bestDiff = tempDiff
-          bestGroupIndex = groupIndex
-        }
-      }
-    })
-
-    if (bestGroupIndex === -1) {
-      groups[groups.length] = _creatGroup(_createHashedBooks(book))
-    } else {
-      groups[bestGroupIndex] = _creatGroup(_createHashedBooks(book, groups[bestGroupIndex].hashedBooks))
-    }
-  })
-
-  return _getUseableGroup(groups)
-}
 
 export const _getHarryPromotionsByLongestPromotion = (books) => {
   let groups = []
@@ -93,13 +65,9 @@ export const getHarryPromotions = (cartItemList) => {
     fill(Array(book.count), omit(book, ['count']))
   )
 
-  const groupsBestDiff = _getHarryPromotionsByBestDiff(seperatedBooks)
   const groupsLongest = _getHarryPromotionsByLongestPromotion(seperatedBooks)
-  const discountBestDiff = summaryDiscount(groupsBestDiff)
-  const discountLongest = summaryDiscount(groupsLongest)
-
-  if (discountBestDiff > discountLongest) {
-    return groupsBestDiff
-  }
-  return groupsLongest
+  return groupsLongest.map(promotion => ({
+    ...promotion,
+    title: HARRY_PROMOTION_TITLE[promotion.books.length - 1]
+  }))
 }
